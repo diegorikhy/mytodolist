@@ -5,6 +5,7 @@ class Board < ApplicationRecord
 
   def to_obj
     {
+      id:         id,
       title:      title,
       created_at: created_at
     }
