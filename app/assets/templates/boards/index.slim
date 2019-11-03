@@ -1,0 +1,36 @@
+. ng-controller="BoardCtrl as vmBoard" ng-init="vmBoard.init()"
+  .container.text-white
+    .row
+      .col-sm
+        h3 Quadro de Tarefas
+        . ng-repeat="board in vmBoard.boards"
+          | {{board.title}}
+
+  . ng-if="vmBoard.formNewBoard"
+    .
+
+  / button.btn.btn-primary type="button" data-toggle="modal" data-target="#boardModal"
+  button.btn.btn-primary type="button" ng-click="vmBoard.form.init()"
+    | Novo
+
+  .modal.fade id="boardModal" tabindex="-1" role="dialog" aria-labelledby="boardTitle" aria-hidden="true"
+    .modal-dialog role="document"
+      .modal-content
+        .modal-header
+          h5.modal-title id="boardTitle" Criar novo Quadro
+          button.close type="button" data-dismiss="modal" aria-label="Close"
+            span aria-hidden="true"
+              | &times;
+
+        . class="modal-body"
+
+          .
+            form ng-submit="vmBoard.form.submit()"
+              .form-group
+                label for="tituloBoard" Título do Quadro
+                input#tituloBoard.form-control ng-model="vmBoard.form.params.title" placeholder="Digite o Título" type="text"
+                input.d-none type="submit"
+
+        .modal-footer
+          button.btn.btn-secondary type="button" data-dismiss="modal" Fechar
+          button.btn.btn-primary type="button" ng-click="vmBoard.form.submit()" Criar

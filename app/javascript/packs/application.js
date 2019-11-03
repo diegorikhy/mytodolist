@@ -4,10 +4,18 @@
 // that code so it'll be compiled.
 
 require("@rails/ujs").start()
-// require("turbolinks").start()
 require("@rails/activestorage").start()
 require("channels")
 
+require("lib/angular.min")
+require("lib/angular-route.min")
+require("lib/angular-sanitize.min")
+require("lib/angular-resource.min")
+require("lib/array.coffee")
+
+require("src/app_angular.coffee")
+require("src/controllers/board_ctrl.coffee")
+require("src/resources/board.coffee")
 
 // Uncomment to copy all static images under ../images to the output folder and reference
 // them with the image_pack_tag helper in views (e.g <%= image_pack_tag 'rails.png' %>)
