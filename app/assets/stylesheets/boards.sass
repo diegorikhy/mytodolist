@@ -37,7 +37,7 @@ body
     box-shadow: 0 .3em .6em rgba(0,0,0,0.2)
     border-radius: .3em
     max-height: 100%
-    .title
+    .title-step
       font-size: 0.9em
       font-weight: 600
       text-align: center
@@ -54,8 +54,20 @@ body
         .actions
           color: #000
     .tasks
-      .no-task
-        font-size: .8em
-        color: #888
-        padding: .3em
-        text-align: center
+      .task
+        background: #dedede
+        border: 1px solid #cecece
+        margin-bottom: .4em
+        white-space: pre-wrap
+        word-break: break-all
+        position: relative
+        padding: .4em
+        padding-right: 1.6em
+        .actions
+          color: #ccc
+          position: absolute
+          top: 0
+          right: 0
+        &:hover
+          .actions
+            color: #777
