@@ -1,7 +1,8 @@
 class Task < ApplicationRecord
   belongs_to :step
 
-  validates :title, presence: { message: '^Preencha o título da Tarefa!' }
+  validates :title, presence: { message: 'Preencha o título da Tarefa!' }
+  validates :step_id, presence: { message: 'A Tarefa precisa estar em uma Etapa!' }
 
   def to_obj
     {

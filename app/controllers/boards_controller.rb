@@ -46,7 +46,7 @@ class BoardsController < ApplicationController
   end
 
   def errors_full_messages board
-    { errors: board.errors.full_messages }
+    { errors: board.errors.messages.values }
   end
 
   def board_params

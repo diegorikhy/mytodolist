@@ -29,7 +29,7 @@ class StepsController < ApplicationController
   end
 
   def errors_full_messages step
-    { errors: step.errors.full_messages }
+    { errors: step.errors.messages.values }
   end
 
   def step_params

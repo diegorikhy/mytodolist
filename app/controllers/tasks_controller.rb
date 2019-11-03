@@ -29,7 +29,7 @@ class TasksController < ApplicationController
   end
 
   def errors_full_messages task
-    { errors: task.errors.full_messages }
+    { errors: task.errors.messages.values }
   end
 
   def task_params
