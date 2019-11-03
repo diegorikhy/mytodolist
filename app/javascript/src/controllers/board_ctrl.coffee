@@ -6,7 +6,10 @@ angular.module 'appSystem'
     vm = @
 
     vm.init = ->
-      closures.list()
+      closures.list ->
+        boardId = localStorage.getItem('board_id')
+        boardId = parseInt(boardId) || vm.boards.first()?.id
+        vm.load(id: boardId)
 
     vm.form =
       init: (board)->
@@ -27,18 +30,20 @@ angular.module 'appSystem'
           $('#boardModal').modal('hide')
 
     vm.load = (board)->
-      closures.show(board)
+      closures.show board, ->
+        localStorage.setItem('board_id', board.id)
 
     closures =
-      list: ->
+      list: (callback)->
         Board.list {},
         (data)->
           console.log 'data', data
           closures.handle data.items
+          callback?()
         (response)->
           console.log 'response', response
       show: (board, callback)->
-        return if vm.loading
+        return if vm.loading || !board.id
         vm.loading = true
 
         Board.show id: board.id,
@@ -61,6 +66,8 @@ angular.module 'appSystem'
             vm.loading = false
             console.log 'data', data
             closures.handle data
+
+            vm.load(data) if action == 'create'
             callback?(data)
           (response)->
             vm.loading = false
@@ -77,8 +84,8 @@ angular.module 'appSystem'
             vm.loading = false
             console.log 'data', data
             vm.boards.removeById params.id
-            vm.current = null
-            closures.handle()
+
+            vm.load(vm.boards.first())
             callback?(data)
           (response)->
             vm.loading = false
@@ -91,10 +98,6 @@ angular.module 'appSystem'
           vm.boards.addOrExtend item
           if vm.current?.id == item.id
             vm.current = item
-
-        unless vm.current
-          vm.current = vm.boards.first()
-          vm.load(vm.current)
 
     vm
 ]
