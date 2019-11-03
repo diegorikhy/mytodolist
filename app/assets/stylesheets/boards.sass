@@ -1,3 +1,7 @@
+html,
+body
+  height: 100%
+
 body
   background: #2b88be !important
 
@@ -15,3 +19,43 @@ body
 
 .cursor-pointer
   cursor: pointer
+
+.overflow-x-hidden
+  overflow-x: hidden
+
+.hover-gray:hover
+  background: #d3d3d3
+
+.step
+  flex: 0 0 20em
+  max-width: 20em
+  .step-content
+    padding: .5em
+    background: #efefef
+    border: 1px solid #ddd
+    border-radius: 1em
+    box-shadow: 0 .3em .6em rgba(0,0,0,0.2)
+    border-radius: .3em
+    max-height: 100%
+    .title
+      font-size: 0.9em
+      font-weight: 600
+      text-align: center
+      border-bottom: 1px solid #ccc
+      padding-bottom: 0.4em
+      margin-bottom: 0.4em
+      position: relative
+      .actions
+        color: #ccc
+        position: absolute
+        top: 0
+        right: 0
+      &:hover
+        .actions
+          color: #000
+    .tasks
+      .no-task
+        font-size: .8em
+        color: #888
+        padding: .3em
+        text-align: center

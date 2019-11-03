@@ -1,0 +1,63 @@
+.h-100 ng-controller="StepCtrl as vmStep" ng-init="vmStep.init(vmBoard.current)" ng-show="vmBoard.current.id" ng-if="!vmBoard.loading"
+  .h-100.container
+    .h-100.row.flex-nowrap
+      .h-100.step.p-3 ng-repeat="step in vmStep.steps"
+        .overflow-x-hidden.step-content
+          .title
+            | {{step.title}}
+            .actions
+              .pl-1.pr-1.cursor-pointer ng-click="vmStep.form.init(step, true)"
+                i.fas.fa-edit
+          .tasks
+
+            .hover-gray.rounded.p-2.cursor-pointer ng-if="!vmStep.form.editing" ng-click="vmStep.form.init()"
+              i.fas.fa-plus.mr-1
+              | Adicionar Tarefa
+
+            .no-task ng-if="!step.tasks.length"
+              | Nenhuma Tarefa ainda!
+
+      .h-100.step.p-3
+        .overflow-x-hidden.step-content
+          .hover-gray.rounded.p-2.cursor-pointer ng-if="!vmStep.form.editing" ng-click="vmStep.form.init()"
+            i.fas.fa-plus.mr-1
+            | Adicionar Etapa
+
+          .rounded.p-2.cursor-pointer ng-if="vmStep.form.editing"
+            form ng-submit="vmStep.form.submit()"
+              .form-group
+                textarea.form-control ng-model="vmStep.form.params.title" rows="3" placeholder="Título da Etapa"
+              .d-flex.justify-content-between
+                button type="submit" class="btn btn-success" Salvar
+                button type="submit" class="btn btn-secondary" ng-click="vmStep.form.cancel()"
+                  .fas.fa-times
+
+  / modal of edit step
+  .modal.fade id="stepModal" tabindex="-1" role="dialog" aria-labelledby="stepTitle" aria-hidden="true"
+    .modal-dialog role="document"
+      .modal-content
+        .modal-header
+          h5.modal-title id="stepTitle"
+            span> ng-if="!vmStep.form.params.id" Criar novo
+            span> ng-if="vmStep.form.params.id" Alterar
+            span> Etapa
+          button.close type="button" data-dismiss="modal" aria-label="Close"
+            span aria-hidden="true"
+              | &times;
+
+        . class="modal-body"
+          .
+            form ng-submit="vmStep.form.submit()"
+              .form-group
+                label for="tituloBoard" Título da Etapa
+                input#tituloBoard.form-control ng-model="vmStep.form.params.title" placeholder="Digite o Título" type="text"
+                input.d-none type="submit"
+
+        .modal-footer
+          button.btn.btn-secondary type="button" data-dismiss="modal"
+            | Fechar
+          button.btn.btn-danger type="button" ng-if="vmStep.form.params.id" data-dismiss="modal" ng-click="vmStep.form.destroy()"
+            | Excluir
+          button.btn.btn-primary type="button" ng-click="vmStep.form.submit()"
+            span ng-if="!vmStep.form.params.id" Criar
+            span ng-if="vmStep.form.params.id" Alterar

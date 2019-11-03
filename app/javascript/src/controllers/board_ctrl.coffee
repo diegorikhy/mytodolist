@@ -45,7 +45,7 @@ angular.module 'appSystem'
           (data)->
             vm.loading = false
             console.log 'data', data
-            vm.currentBoard = data
+            vm.current = data
             closures.handle data
             callback?(data)
           (response)->
@@ -77,7 +77,7 @@ angular.module 'appSystem'
             vm.loading = false
             console.log 'data', data
             vm.boards.removeById params.id
-            vm.currentBoard = null
+            vm.current = null
             closures.handle()
             callback?(data)
           (response)->
@@ -89,11 +89,12 @@ angular.module 'appSystem'
 
         for item in items
           vm.boards.addOrExtend item
-          if vm.currentBoard?.id == item.id
-            vm.currentBoard = item
+          if vm.current?.id == item.id
+            vm.current = item
 
-        unless vm.currentBoard
-          vm.currentBoard = vm.boards.first()
+        unless vm.current
+          vm.current = vm.boards.first()
+          vm.load(vm.current)
 
     vm
 ]

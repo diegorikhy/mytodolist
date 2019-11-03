@@ -7,7 +7,7 @@ Rails.application.routes.draw do
   post '/boards'            => 'boards#create'
   delete '/boards/:id'      => 'boards#destroy'
 
-  # resources :boards
+  resources :steps
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
   # root 'boards#index',    defaults: {format: :json}
 end

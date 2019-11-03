@@ -1,13 +1,15 @@
-. ng-controller="BoardCtrl as vmBoard" ng-init="vmBoard.init()"
+.d-flex.flex-column.h-100 ng-controller="BoardCtrl as vmBoard" ng-init="vmBoard.init()"
   .container.text-white
     .row.d-flex.align-items-center.header
       .p-3
-        h3.m-0 Quadro de Tarefas
+        h3.m-0
+          i.fas.fa-chalkboard.mr-2
+          | Quadro de Tarefas
       .p-3
         .dropdown
           .btn-group
             button#dropdownMenuBoard.btn.btn-warning aria-expanded="false" aria-haspopup="true" data-reference="parent" data-toggle="dropdown" type="button"
-              | {{vmBoard.currentBoard.title || 'Selecione'}}
+              | {{vmBoard.current.title || 'Selecione'}}
             button.btn.btn-warning.last-btn type="button" ng-click="vmBoard.form.init()"
               i.fas.fa-plus-circle
             .dropdown-menu aria-labelledby="dropdownMenuBoard"
@@ -18,12 +20,17 @@
                   .p-2.cursor-pointer ng-click="vmBoard.form.init(board)"
                     i.fas.fa-edit
 
+  .flex-grow-1.overflow-auto ng-include="'#{asset_path('boards/steps.html')}'"
+
   / modal of create board
   .modal.fade id="boardModal" tabindex="-1" role="dialog" aria-labelledby="boardTitle" aria-hidden="true"
     .modal-dialog role="document"
       .modal-content
         .modal-header
-          h5.modal-title id="boardTitle" Criar novo Quadro de Tarefas
+          h5.modal-title id="boardTitle"
+            span> ng-if="!vmBoard.form.params.id" Criar novo
+            span> ng-if="vmBoard.form.params.id" Alterar
+            span> Quadro de Tarefas
           button.close type="button" data-dismiss="modal" aria-label="Close"
             span aria-hidden="true"
               | &times;
