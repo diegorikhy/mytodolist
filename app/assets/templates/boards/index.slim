@@ -1,11 +1,11 @@
 .d-flex.flex-column.h-100 ng-controller="BoardCtrl as vmBoard" ng-init="vmBoard.init()"
   .container.text-white
     .row.d-flex.align-items-center.header
-      .p-3
+      .pl-3.pr-3.pt-2.pb-2
         h3.m-0
           i.fas.fa-chalkboard.mr-2
           | Quadro de Tarefas
-      .p-3
+      .pl-3.pr-3.pt-2.pb-2
         .dropdown
           .btn-group
             button#dropdownMenuBoard.btn.btn-warning ng-if="!vmBoard.boards.length" ng-click="vmBoard.form.init()"

@@ -54,7 +54,7 @@ angular.module 'appSystem'
             vm.loading = false
             alert response.data?.errors
       destroy: (params, callback)->
-        unless confirm("Tem certeza que deseja destruir o Quadro #{params.title}?")
+        unless confirm("Tem certeza que deseja destruir a Tarefa #{params.title}?")
           return
 
         return if vm.loading
