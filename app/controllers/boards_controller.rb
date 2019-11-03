@@ -10,7 +10,7 @@ class BoardsController < ApplicationController
   end
 
   def show
-    board = get_board
+    board = Board.preload(steps: :tasks).where(id: params[:id]).first
 
     return render json: {}, status: :not_found if board.blank?
     return render json: board.to_show_obj, status: :ok
@@ -42,7 +42,7 @@ class BoardsController < ApplicationController
   private
 
   def get_board
-    Board.find(params[:id])
+    Board.where(id: params[:id]).first
   end
 
   def errors_full_messages board
