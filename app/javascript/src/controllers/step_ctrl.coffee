@@ -49,7 +49,7 @@ angular.module 'appSystem'
             vm.loading = false
             console.log 'response', response
       destroy: (params, callback)->
-        unless confirm("Tem certeza que deseja destruir o Quadro #{params.title}?")
+        unless confirm("Tem certeza que deseja destruir a Etapa #{params.title}?\nTodas as Tarefas dessa Etapa serão EXCLUÍDAS!")
           return
 
         return if vm.loading
@@ -59,9 +59,7 @@ angular.module 'appSystem'
           (data)->
             vm.loading = false
             console.log 'data', data
-            vm.boards.removeById params.id
-            vm.currentBoard = null
-            closures.handle()
+            vm.steps.removeById params.id
             callback?(data)
           (response)->
             vm.loading = false
