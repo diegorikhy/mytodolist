@@ -2,6 +2,7 @@ angular.module 'appSystem', [
   'ngResource'
   'ngRoute'
   'ngSanitize'
+  'as.sortable'
 ]
 
 .config [

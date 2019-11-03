@@ -43,7 +43,7 @@ body
       text-align: center
       border-bottom: 1px solid #ccc
       padding-bottom: 0.4em
-      margin-bottom: 0.4em
+      // margin-bottom: 0.4em
       position: relative
       .actions
         color: #ccc
@@ -53,21 +53,42 @@ body
       &:hover
         .actions
           color: #000
-    .tasks
-      .task
-        background: #dedede
-        border: 1px solid #cecece
-        margin-bottom: .4em
-        white-space: pre-wrap
-        word-break: break-all
-        position: relative
-        padding: .4em
-        padding-right: 1.6em
-        .actions
-          color: #ccc
-          position: absolute
-          top: 0
-          right: 0
-        &:hover
-          .actions
-            color: #777
+    &.add
+      background: #d5d5d5
+      border: 1px solid #b3b3b3
+      .hover-gray:hover
+        background: #c3c3c3
+
+.task
+  background: #dedede
+  border: 1px solid #cecece
+  margin-bottom: .5em
+  white-space: pre-wrap
+  word-break: break-all
+  position: relative
+  padding: .4em
+  padding-right: 1.6em
+  border-radius: .2em
+  .actions
+    color: #ccc
+    position: absolute
+    top: 0
+    right: 0
+  &:hover
+    .actions
+      color: #777
+
+.as-sortable-item-handle
+
+.as-sortable-placeholder
+  border: 1px dashed #cecece
+  box-sizing: border-box
+  margin-bottom: .5em
+  border-radius: .2em
+
+
+.as-sortable-drag
+    opacity: .8
+
+
+.as-sortable-hidden

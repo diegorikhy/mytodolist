@@ -12,14 +12,14 @@
             . ng-include="'#{asset_path('boards/task.html')}'"
 
       .h-100.step.p-3
-        .overflow-x-hidden.step-content
-          .hover-gray.rounded.p-2.cursor-pointer ng-if="!vmStep.form.editing" ng-click="vmStep.form.init()"
+        .overflow-x-hidden.step-content ng-class="{'add': !vmStep.form.editing }"
+          .hover-gray.rounded.p-2.cursor-pointer.text-center ng-if="!vmStep.form.editing" ng-click="vmStep.form.init()"
             i.fas.fa-plus.mr-2
             | Adicionar Etapa
 
-          .rounded.p-2.cursor-pointer ng-if="vmStep.form.editing"
+          .rounded ng-if="vmStep.form.editing"
             form ng-submit="vmStep.form.submit()"
-              .form-group
+              .form-group.mb-2
                 input.form-control type="text" ng-model="vmStep.form.params.title" placeholder="Título da Etapa"
               .d-flex.justify-content-between
                 button type="submit" class="btn btn-success" Salvar
@@ -39,7 +39,7 @@
         . class="modal-body"
           .
             form ng-submit="vmStep.form.submit()"
-              .form-group
+              .form-group.mb-2
                 label for="tituloBoard" Título da Etapa
                 input#tituloBoard.form-control ng-model="vmStep.form.params.title" placeholder="Digite o Título" type="text"
                 input.d-none type="submit"

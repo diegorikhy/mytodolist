@@ -13,7 +13,7 @@ class Board < ApplicationRecord
 
   def to_show_obj
     attrbs = to_obj
-    attrbs[:steps] = steps.map(&:to_show_obj)
+    attrbs[:steps] = steps.order(:created_at).map(&:to_show_obj)
     attrbs
   end
 end

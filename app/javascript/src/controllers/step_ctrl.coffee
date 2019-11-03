@@ -16,16 +16,12 @@ angular.module 'appSystem'
         else
           @params = title: ''
 
-        if @modal
-          $('#stepModal').modal('show')
-        else
-          @editing = true
+        return @editing = true unless @modal
+        $('#stepModal').modal('show')
       cancel: ->
         @params = {}
-        if @modal
-          $('#stepModal').modal('hide')
-        else
-          @editing = false
+        return @editing = false unless @modal
+        $('#stepModal').modal('hide')
       submit: ->
         closures.save @params, ->
           vm.form.cancel()
@@ -42,12 +38,11 @@ angular.module 'appSystem'
         Step[action] params,
           (data)->
             vm.loading = false
-            console.log 'data', data
             closures.handle data
             callback?(data)
           (response)->
             vm.loading = false
-            console.log 'response', response
+            alert response.data?.errors
       destroy: (params, callback)->
         unless confirm("Tem certeza que deseja destruir a Etapa #{params.title}?\nTodas as Tarefas dessa Etapa serão EXCLUÍDAS!")
           return
@@ -58,12 +53,11 @@ angular.module 'appSystem'
         Step.destroy id: params.id,
           (data)->
             vm.loading = false
-            console.log 'data', data
             vm.steps.removeById params.id
             callback?(data)
           (response)->
             vm.loading = false
-            console.log 'response', response
+            alert response.data?.errors
       handle: (items...)->
         items = items.flattenCompact()
         vm.steps ||= []

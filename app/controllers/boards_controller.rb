@@ -3,7 +3,7 @@ class BoardsController < ApplicationController
     respond_to do |format|
       format.html { render layout: 'application' }
       format.json {
-        boards = Board.all
+        boards = Board.all.order(:title)
         render json: { items: boards.map(&:to_obj) }
       }
     end

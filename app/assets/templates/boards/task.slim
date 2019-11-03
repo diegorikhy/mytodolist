@@ -1,19 +1,20 @@
 . ng-controller="TaskCtrl as vmTask" ng-init="vmTask.init(step)"
-  . ng-repeat="task in vmTask.tasks"
-    .task
-      .title
-        | {{task.title}}
-        .actions
-          .pl-1.pr-1.cursor-pointer ng-click="vmTask.form.init(task, true)"
-            i.fas.fa-edit
+  .pt-2.pb-2 style="position: relative" as-sortable="vmTask.sortable.dragControlListeners" ng-model="vmTask.tasks"
+    . ng-repeat="task in vmTask.tasks"
+      .task as-sortable-item=""
+        .title as-sortable-item-handle=""
+          | {{task.title}}
+          .actions
+            .pl-1.pr-1.cursor-pointer ng-click="vmTask.form.init(task, true)"
+              i.fas.fa-edit
 
-  .hover-gray.rounded.p-2.cursor-pointer ng-if="!vmTask.form.editing" ng-click="vmTask.form.init()"
+  .hover-gray.rounded.p-2.cursor-pointer.text-center ng-if="!vmTask.form.editing" ng-click="vmTask.form.init()"
     i.fas.fa-plus.mr-2
     | Adicionar Tarefa
 
-  .rounded.p-2.cursor-pointer ng-if="vmTask.form.editing"
+  .rounded ng-if="vmTask.form.editing"
     form ng-submit="vmTask.form.submit()"
-      .form-group
+      .form-group.mb-2
         textarea.form-control ng-model="vmTask.form.params.title" rows="3" placeholder="Descreva a Tarefa"
       .d-flex.justify-content-between
         button type="submit" class="btn btn-success" Salvar
@@ -21,11 +22,11 @@
           .fas.fa-times
 
   / modal of edit step
-  .modal.fade id="taskModal" tabindex="-1" role="dialog" aria-labelledby="taskTitle" aria-hidden="true"
+  .modal.fade id="taskModal{{step.id}}" tabindex="-1" role="dialog" aria-labelledby="taskTitle" aria-hidden="true"
     .modal-dialog role="document"
       .modal-content
         .modal-header
-          h5.modal-title id="taskTitle" Alterar  Tarefa
+          h5.modal-title id="taskTitle" Alterar Tarefa
           button.close type="button" data-dismiss="modal" aria-label="Close"
             span aria-hidden="true"
               | &times;
@@ -33,7 +34,7 @@
         . class="modal-body"
           .
             form ng-submit="vmTask.form.submit()"
-              .form-group
+              .form-group.mb-2
                 label for="tituloBoard" Descreva a Tarefa
                 textarea#tituloBoard.form-control ng-model="vmTask.form.params.title" placeholder="Descreva a Tarefa" rows="3"
                 input.d-none type="submit"

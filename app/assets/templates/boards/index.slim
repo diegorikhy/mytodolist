@@ -8,7 +8,9 @@
       .p-3
         .dropdown
           .btn-group
-            button#dropdownMenuBoard.btn.btn-warning aria-expanded="false" aria-haspopup="true" data-reference="parent" data-toggle="dropdown" type="button"
+            button#dropdownMenuBoard.btn.btn-warning ng-if="!vmBoard.boards.length" ng-click="vmBoard.form.init()"
+              | Criar Quadro
+            button#dropdownMenuBoard.btn.btn-warning ng-if="vmBoard.boards.length" aria-expanded="false" aria-haspopup="true" data-reference="parent" data-toggle="dropdown" type="button"
               | {{vmBoard.current.title || 'Selecione'}}
             button.btn.btn-warning.last-btn type="button" ng-click="vmBoard.form.init()"
               i.fas.fa-plus-circle
@@ -19,6 +21,10 @@
                     | {{board.title}}
                   .p-2.cursor-pointer ng-click="vmBoard.form.init(board)"
                     i.fas.fa-edit
+
+  .p-5 ng-if="!vmBoard.boards.length"
+    .text-center.font-weight-light.text-white style="font-size: 2em"
+      | Crie seu primeiro Quadro de Tarefas!
 
   .flex-grow-1.overflow-auto ng-include="'#{asset_path('boards/steps.html')}'"
 
@@ -39,7 +45,7 @@
 
           .
             form ng-submit="vmBoard.form.submit()"
-              .form-group
+              .form-group.mb-2
                 label for="tituloBoard" Título do Quadro
                 input#tituloBoard.form-control ng-model="vmBoard.form.params.title" placeholder="Digite o Título" type="text"
                 input.d-none type="submit"

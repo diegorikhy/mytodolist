@@ -12,6 +12,7 @@ require("lib/angular-route.min")
 require("lib/angular-sanitize.min")
 require("lib/angular-resource.min")
 require("lib/array.coffee")
+require("lib/ng-sortable.min")
 
 require("src/app_angular.coffee")
 
