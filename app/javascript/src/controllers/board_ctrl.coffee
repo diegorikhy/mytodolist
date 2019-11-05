@@ -8,8 +8,14 @@ angular.module 'appSystem'
     vm.init = ->
       closures.list ->
         boardId = localStorage.getItem('board_id')
-        boardId = parseInt(boardId) || vm.boards.first()?.id
-        vm.load(id: boardId)
+        boardId = parseInt(boardId)
+
+        if boardId
+          board = vm.boards.getById(boardId)
+        else
+          board = vm.boards.first()
+
+        vm.load(id: board.id) if board?.id
 
     vm.form =
       init: (board)->
